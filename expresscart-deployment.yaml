@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/1/./kompose-linux-amd64 convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: expresscart
+  name: expresscart
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: expresscart
+    spec:
+      containers:
+      - env:
+        - name: NODE_ENV
+          value: development
+        - name: NODE_PATH
+          value: /
+        image: jvalen92.azurecr.io/expresscar92:v1
+        name: expresscart
+        ports:
+        - containerPort: 1111
+        resources: {}
+      restartPolicy: Always
+status: {}
